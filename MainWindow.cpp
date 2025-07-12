@@ -161,7 +161,7 @@ void MainWindow::on_downloadButton_clicked()
 
             serialPort->write(combo);
             serialPort->waitForBytesWritten(1000);
-            while(serialPort->waitForReadyRead(100))
+            while(serialPort->waitForReadyRead(500))
                 data.append(serialPort->readAll());
 			ui->statusBar->showMessage(QString(data));
         }

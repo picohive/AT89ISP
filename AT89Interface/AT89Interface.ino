@@ -134,10 +134,14 @@ void read_program_memory()
 
 void write_program_memory()
 {
-  sendSPI(0x50);
-  sendSPI(currentPage);
+  uint16_t addr;
+
   for (int i = 0; i < 256; i++)
   {
+    addr = ((uint16_t)currentPage << 8) | i;
+    sendSPI(0x40);
+    sendSPI((addr >> 8) & 0xFF);
+    sendSPI(addr & 0xFF);
     sendSPI(pageData[i]);
   }
 }
